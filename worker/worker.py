@@ -63,10 +63,10 @@ def get_video_info(url):
 
 def download_video(url, output_path):
     print(f"Downloading {url}...")
-    # Use yt-dlp to download
+    # Use yt-dlp to download with more flexible format selection
     cmd = [
         "yt-dlp",
-        "-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
+        "-f", "best[ext=mp4]/best",  # More flexible: accept any MP4 or best available
         "-o", output_path,
         "--no-playlist",
         url
