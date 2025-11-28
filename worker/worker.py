@@ -63,15 +63,19 @@ def get_video_info(url):
 
 def download_video(url, output_path):
     print(f"Downloading {url}...")
-    # Use yt-dlp to download with more flexible format selection
+    # Use yt-dlp to download - simplified for compatibility
     cmd = [
         "yt-dlp",
-        "-f", "best[ext=mp4]/best",  # More flexible: accept any MP4 or best available
         "-o", output_path,
         "--no-playlist",
         url
     ]
-    subprocess.run(cmd, check=True)
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    
+    if result.returncode != 0:
+        error_msg = result.stderr if result.stderr else result.stdout
+        print(f"yt-dlp error: {error_msg}")
+        raise Exception(f"yt-dlp failed: {error_msg[:200]}")  # Truncate to first 200 chars
 
 def upload_video(youtube, file_path, title, description):
     print(f"Uploading {title}...")
