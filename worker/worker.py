@@ -67,7 +67,7 @@ def download_video(url, output_path):
     cmd = [
         "yt-dlp",
         "--user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "--extractor-args", "youtube:player_client=web",
+        "--extractor-args", "youtube:player_client=android",  # Android client bypasses bot detection better
         "--retries", "5",
         "--sleep-requests", "1",  # Sleep 1 second between requests
         "-o", output_path,
