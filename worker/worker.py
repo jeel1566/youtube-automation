@@ -63,9 +63,10 @@ def get_video_info(url):
 
 def download_video(url, output_path):
     print(f"Downloading {url}...")
-    # Use yt-dlp to download - simplified for compatibility
+    # Use yt-dlp to download - explicitly tell it to use node
     cmd = [
         "yt-dlp",
+        "--extractor-args", "youtube:player_client=web",
         "-o", output_path,
         "--no-playlist",
         url
